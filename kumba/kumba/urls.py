@@ -16,7 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
+from django.contrib.auth.views import login, logout, forgotPassword, register
+
+from .views.users import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^login/$', login, name='login'),
+    url(r'^logout/$', logout, name='logout'),
+    url(r'^forgotPassword/$', forgot_password, name='forgot_password'),
+    url(r'^newPassword/$', new_Password, name='new_password'),
+    url(r'^register/$', register.as_view(), name='register'),
+    url(r'^users/(?P<username>\w+)/update_password/$', update_password.as_view(), name='user_update_password'),
+    url(r'^users/$', get_all_users.as_view(), name='users_get_all'),
+    url(r'^users/username/(?P<username>\w+)/$', get_user_username.as_view(), name='user_get_by_username'),
+    url(r'^users/email/(?P<email>\w+)/$', get_user_email.as_view(), name='user_get_by_email'),
+    url(r'^users/data/$', get_user_data.as_view(), name='user_filters'),
+    url(r'^users/(?P<username>\w+)/update/$', update_user.as_view(), name='user_update'),
+    url(r'^users/(?P<username>\w+)/delete/$', delete_user.as_view(), name='user_delete'),
+    url(r'^users/(?P<username>\w+)/roles/add/$', add_role.as_view(), name='user_roles_add'),
+    url(r'^users/(?P<username>\w+)/roles/remove/$', remove_role.as_view(), name='user_roles_remove'),
+    
 ]
