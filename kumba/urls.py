@@ -18,8 +18,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path(r'login', login, name='login'),
-    path(r'logout', logout, name='logout'),
+    path(r'^login/$', login, name='login'),
+    path(r'^logout/$', logout, name='logout'),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0),name='schema-swagger-ui'),
 
     
